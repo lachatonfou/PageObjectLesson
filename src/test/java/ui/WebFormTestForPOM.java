@@ -5,20 +5,29 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
+import pageObjects.HomePage;
+import pageObjects.WebFormPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WebFormTest extends BaseTest {
+public class WebFormTestForPOM extends BaseTestForPOM {
 
     @Test
     void openWebFormTest() {
-        driver.findElement(By.xpath("//h5[text()='Chapter 3. WebDriver Fundamentals']/../a[contains(@href, 'web-form')]")).click();
-        String webFormUrl = "web-form.html";
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        WebFormPage webFormPage = homePage.openWebFormPage();
+        String currentUrl = webFormPage.getCurrentUrl();
+        WebElement title = webFormPage.getTitle();
+        String webFormUrl = webFormPage.getUrl();
 
-        String currentUrl = driver.getCurrentUrl();
-        WebElement title = driver.findElement(By.className("display-6"));
+//        driver.findElement(By.xpath("//h5[text()='Chapter 3. WebDriver Fundamentals']/../a[contains(@href, 'web-form')]")).click();
+//        String webFormUrl = "web-form.html";
+//
+//        String currentUrl = driver.getCurrentUrl();
+//        WebElement title = driver.findElement(By.className("display-6"));
 
-        assertEquals(BASE_URL + webFormUrl, currentUrl);
+        assertEquals(homePage.BASE_URL + webFormUrl, currentUrl);
         assertEquals("Web form", title.getText());
 
     }

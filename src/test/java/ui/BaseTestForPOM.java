@@ -7,14 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class BaseTest {
+public class BaseTestForPOM {
     WebDriver driver;
-    protected static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
 
     @BeforeEach
     void setup() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
