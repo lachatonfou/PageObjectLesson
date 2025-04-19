@@ -1,5 +1,6 @@
 package ui;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,27 +10,38 @@ import pageObjects.HomePage;
 import pageObjects.WebFormPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static pageObjects.HomePage.BASE_URL;
 
+@Feature("POM")
 public class WebFormTestForPOM extends BaseTestForPOM {
 
     @Test
     void openWebFormTest() {
         HomePage homePage = new HomePage(driver);
-        homePage.open();
         WebFormPage webFormPage = homePage.openWebFormPage();
         String currentUrl = webFormPage.getCurrentUrl();
         WebElement title = webFormPage.getTitle();
         String webFormUrl = webFormPage.getUrl();
 
-//        driver.findElement(By.xpath("//h5[text()='Chapter 3. WebDriver Fundamentals']/../a[contains(@href, 'web-form')]")).click();
-//        String webFormUrl = "web-form.html";
-//
-//        String currentUrl = driver.getCurrentUrl();
-//        WebElement title = driver.findElement(By.className("display-6"));
-
-        assertEquals(homePage.BASE_URL + webFormUrl, currentUrl);
+        assertEquals(BASE_URL + webFormUrl, currentUrl);
         assertEquals("Web form", title.getText());
+    }
 
+    @Test
+    void openWebFormTestWithCheck() {
+        HomePage homePage = new HomePage(driver);
+        WebFormPage webFormPage = homePage.openWebFormPage();
+
+        webFormPage.checkIsWebPage();
+    }
+
+    @Test
+    void submitFormTest() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        WebFormPage webFormPage = homePage.openWebFormPage();
+
+        webFormPage.submitForm();
+        Thread.sleep(3000);
     }
 
     @Test

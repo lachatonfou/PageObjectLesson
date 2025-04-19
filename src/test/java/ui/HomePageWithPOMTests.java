@@ -1,24 +1,19 @@
 package ui;
 
-import org.junit.jupiter.api.AfterEach;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pageObjects.HomePage;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ui.BaseTest.BASE_URL;
 
+@Feature("POM")
 public class HomePageWithPOMTests extends BaseTestForPOM {
 
     @Test
     void openHomePageTest() {
         HomePage homePage = new HomePage(driver);
-        homePage.open();
 
-        String actualTitle = homePage.getTitle();
+        String actualTitle = homePage.getWebTitle();
 
         assertEquals("Hands-On Selenium WebDriver with Java", actualTitle);
     }
